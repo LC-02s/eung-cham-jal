@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Chab,
   Ddag,
@@ -14,56 +16,68 @@ import type { Font } from '@/types'
 
 export const FONTS: Font[] = [
   {
-    name: 'Chab',
+    id: 'Chab',
+    name: '롯데리아 촵땡겨체',
     weight: [400],
     className: Chab.className,
   },
   {
-    name: 'Ddag',
+    id: 'Ddag',
+    name: '롯데리아 딱붙어체',
     weight: [400],
     className: Ddag.className,
   },
   {
-    name: 'EFJejudoldam',
+    id: 'EFJejudoldam',
+    name: '제주돌담체',
     weight: [400],
     className: EFJejudoldam.className,
   },
   {
-    name: 'HakgyoansimGureum',
+    id: 'HakgyoansimGureum',
+    name: '학교안심 구름',
     weight: [400],
     className: HakgyoansimGureum.className,
   },
   {
-    name: 'HakgyoansimTtwimteul',
+    id: 'HakgyoansimTtwimteul',
+    name: '학교안심 뜀틀',
     weight: [400],
     className: HakgyoansimTtwimteul.className,
   },
   {
-    name: 'HakgyoansimPuzzle',
+    id: 'HakgyoansimPuzzle',
+    name: '학교안심 퍼즐',
     weight: [900],
     className: HakgyoansimPuzzle.className,
   },
   {
-    name: 'PyeongChangPeace',
+    id: 'PyeongChangPeace',
+    name: '평창평화체',
     weight: [300, 700],
     className: PyeongChangPeace.className,
   },
   {
-    name: 'YoonChildfundkoreaDaeHan',
+    id: 'YoonChildfundkoreaDaeHan',
+    name: '윤초록우산어린이 대한',
     weight: [400],
     className: YoonChildfundkoreaDaeHan.className,
   },
   {
-    name: 'YoonChildfundkoreaManSeh',
+    id: 'YoonChildfundkoreaManSeh',
+    name: '윤초록우산어린이 만세',
     weight: [400],
     className: YoonChildfundkoreaManSeh.className,
   },
 
   {
-    name: 'YoonChildfundkoreaMinGuk',
+    id: 'YoonChildfundkoreaMinGuk',
+    name: '윤초록우산어린이 민국',
     weight: [400],
     className: YoonChildfundkoreaMinGuk.className,
   },
 ]
 
-export const fontDB = new Map(FONTS.map((font) => [font.name, font]))
+export const fontDB: Map<Font['id'], Font> = FONTS.reduce((db, font) => {
+  return db.set(font.id, font)
+}, new Map())
