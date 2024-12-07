@@ -4,14 +4,14 @@ import React from 'react'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCards } from 'swiper/modules'
-import { Button, Input } from '@/components/ui'
+import { Button } from '@/components/ui'
 
 import 'swiper/css'
 import 'swiper/css/effect-cards'
 
 import { TEMPLATES } from '@/data'
 
-const Template = () => {
+const SelectTemplatePage = () => {
   const [activeId, setActiveId] = React.useState(TEMPLATES[0].id)
 
   return (
@@ -30,14 +30,16 @@ const Template = () => {
               setActiveId(TEMPLATES[swiper.activeIndex].id)
             }}
           >
-            {TEMPLATES.map((v) => (
-              <SwiperSlide key={v.id} className="w-full overflow-hidden rounded-2xl pb-[140%]">
+            {TEMPLATES.map(({ id, imageURL, ratio }) => (
+              <SwiperSlide
+                key={id}
+                className="w-full overflow-hidden rounded-2xl"
+                style={{ paddingBottom: `${ratio * 100}%` }}
+              >
                 <div
                   className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${v.src})` }}
-                >
-                  {v.title}
-                </div>
+                  style={{ backgroundImage: `url(${imageURL})` }}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -54,4 +56,4 @@ const Template = () => {
   )
 }
 
-export default Template
+export default SelectTemplatePage
