@@ -66,7 +66,7 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
         defaultValue={fontId}
         onValueChange={(value: FontId) => modifyContent({ fontId: value })}
       >
-        <SelectTrigger>{targetFont?.name}</SelectTrigger>
+        <SelectTrigger>{targetFont.name}</SelectTrigger>
         <SelectContent>
           {FONTS.map(({ id, name }) => (
             <SelectItem key={id} value={id}>
@@ -83,7 +83,7 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
         >
           <SelectTrigger>{fontWeightNames.get(fontWeight)}</SelectTrigger>
           <SelectContent>
-            {targetFont?.weight.map((weight) => (
+            {targetFont.weight.map((weight) => (
               <SelectItem key={`${targetFont.id}${weight}`} value={weight.toString()}>
                 {fontWeightNames.get(weight)}
               </SelectItem>

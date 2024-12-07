@@ -28,7 +28,7 @@ const TEMPLATES: Template[] = [
         id: 'content-1',
         text: '가지고 있으면',
         fontId: 'PyeongChangPeace',
-        fontWeight: 900,
+        fontWeight: 700,
         fontSize: 60,
         props: {
           className:
@@ -51,7 +51,7 @@ const TEMPLATES: Template[] = [
         id: 'content-3',
         text: '무적권 합격함',
         fontId: 'PyeongChangPeace',
-        fontWeight: 900,
+        fontWeight: 700,
         fontSize: 60,
         props: {
           className:
@@ -71,7 +71,7 @@ const TEMPLATES: Template[] = [
         id: 'content-1',
         text: '행 운 만 땅',
         fontId: 'PyeongChangPeace',
-        fontWeight: 900,
+        fontWeight: 700,
         fontSize: 120,
         props: {
           className: 'left-1/2 -translate-x-1/2 top-[6%] w-fit whitespace-nowrap text-[#023802]',
@@ -82,7 +82,7 @@ const TEMPLATES: Template[] = [
         id: 'content-2',
         text: '만 능 부 적',
         fontId: 'PyeongChangPeace',
-        fontWeight: 900,
+        fontWeight: 700,
         fontSize: 120,
         props: {
           className: 'right-1/2 bottom-[6%] translate-x-1/2 w-fit whitespace-nowrap text-[#023802]',
