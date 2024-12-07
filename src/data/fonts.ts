@@ -12,7 +12,7 @@ import {
   YoonChildfundkoreaManSeh,
   YoonChildfundkoreaMinGuk,
 } from '@/app/fonts'
-import type { Font } from '@/types'
+import type { Font, FontWeight } from '@/types'
 
 export const FONTS: Font[] = [
   {
@@ -81,3 +81,14 @@ export const FONTS: Font[] = [
 export const fontDB: Map<Font['id'], Font> = FONTS.reduce((db, font) => {
   return db.set(font.id, font)
 }, new Map())
+
+export const fontWeightNames: Map<FontWeight, string> = new Map()
+  .set(100, 'Thin')
+  .set(200, 'ExtraLight')
+  .set(300, 'light')
+  .set(400, 'Regular')
+  .set(500, 'Medium')
+  .set(600, 'SemiBold')
+  .set(700, 'Bold')
+  .set(800, 'ExtraBold')
+  .set(900, 'Black')
