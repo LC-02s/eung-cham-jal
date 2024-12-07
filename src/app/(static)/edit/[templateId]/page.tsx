@@ -29,7 +29,7 @@ const EditPage = ({ params: { templateId } }: EditPageProps) => {
     <div className="w-full flex-1">
       <div className="flex w-full items-center justify-center bg-gray-100 p-8">
         <div className="w-4/5">
-          <TemplateView />
+          <TemplateView mode="modify" />
         </div>
       </div>
       <TemplateForm />

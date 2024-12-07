@@ -44,7 +44,7 @@ const withTemplateViewModifiableContent = ({ index }: Pick<TemplateViewContentPr
 
 const TemplateViewContent = ({
   containerRatio,
-  mode = 'modify',
+  mode = 'view',
   index,
 }: TemplateViewContentProps) => {
   const content = useTemplateContent(index)
@@ -75,7 +75,7 @@ const TemplateView = ({ mode }: TemplateViewProps) => {
     <div
       id="template"
       ref={targetRef}
-      className="relative w-full overflow-hidden bg-cover bg-center"
+      className="relative w-full overflow-hidden bg-cover bg-center shadow-2xl"
       style={{ backgroundImage: `url(${backgroundURL})`, paddingBottom: `${ratio * 100}%` }}
     >
       {Array.from({ length: contentsLength }, (_, idx) => (
