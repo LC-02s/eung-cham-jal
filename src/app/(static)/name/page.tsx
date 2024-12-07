@@ -1,8 +1,24 @@
+'use client'
+
+import { useState } from 'react'
+
 import { Button, Input } from '@/components/ui'
-import Link from 'next/link'
-import { getRandomId } from '@/utils'
+import { getRandomName } from '@/utils'
+import { useNameStore } from '@/store'
+import { useRouter } from 'next/navigation'
 
 const Name = () => {
+  const router = useRouter()
+  const { setName: setStoreName } = useNameStore()
+  const [stateName, setStateName] = useState(getRandomName())
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStateName(e.target.value)
+  }
+
+  const handleClick = () => {
+    setStoreName(stateName)
+    router.push('/template')
+  }
   return (
     <>
       <div className="flex w-full flex-1 flex-col items-center justify-center px-16 text-center">
@@ -11,15 +27,18 @@ const Name = () => {
           <span>무엇인가요?</span>
         </div>
         <div className="mt-12 w-full">
-          <Input type="text" className="text-center" value={getRandomId()} />
+          <Input
+            type="text"
+            className="text-center"
+            value={stateName}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
 
       <div className="w-full px-6 py-20">
-        <Button variant="custom" asChild>
-          <Link href="/template" title="다음으로">
-            다음으로
-          </Link>
+        <Button variant="custom" onClick={handleClick}>
+          다음으로
         </Button>
       </div>
     </>
