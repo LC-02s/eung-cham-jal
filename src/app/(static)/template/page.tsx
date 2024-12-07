@@ -17,7 +17,7 @@ const SelectTemplatePage = () => {
   return (
     <>
       <div className="flex h-[calc(100dvh-3.25rem-14rem)] w-full flex-col items-center justify-center">
-        <p className="w-full break-keep px-6 pb-20 text-center text-xl font-bold">
+        <p className="w-full break-keep px-6 pb-20 text-center text-3xl font-bold">
           부적 템플릿을 선택해주세요
         </p>
         <div className="relative flex min-h-[calc(100%-20rem)] w-full items-center justify-center">
