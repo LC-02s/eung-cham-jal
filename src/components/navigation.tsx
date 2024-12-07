@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Icon } from '@/components'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 const Navigation = () => {
   const { back } = useRouter()
@@ -21,7 +22,9 @@ const Navigation = () => {
         >
           <Icon.ArrowLeft />
         </Button>
-        <Image src="/img/main-logo.png" alt="응참잘 로고" width={102} height={36} priority />
+        <Link href="/" title="메인으로">
+          <Image src="/img/main-logo.png" alt="응참잘 로고" width={102} height={36} priority />
+        </Link>
       </nav>
     </div>
   )
