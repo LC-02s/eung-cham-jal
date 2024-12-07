@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCards } from 'swiper/modules'
-import { Button, Input } from '@/components/ui'
+import { Button } from '@/components/ui'
 
 import 'swiper/css'
 import 'swiper/css/effect-cards'
