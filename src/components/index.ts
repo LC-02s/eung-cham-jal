@@ -1,3 +1,5 @@
 export * as Icon from './icon'
 export * from './ui'
 export { default as Navigation } from './navigation'
+export { default as Break } from './break'
+export { default as TemplateView } from './TemplateView'
