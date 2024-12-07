@@ -32,7 +32,7 @@ const TEMPLATES: Template[] = [
         fontSize: 60,
         props: {
           className:
-            'left-1/2 -translate-x-1/2 w-fit whitespace-nowrap text-[#7F0E0E] top-[24%] -scale-y-100',
+            'left-1/2 -translate-x-1/2 w-fit whitespace-nowrap text-[#7F0E0E] top-[24%] rotate-180',
           style: { letterSpacing: '0.42em' },
         },
       },
