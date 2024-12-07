@@ -3,7 +3,7 @@
 import React from 'react'
 import { create } from 'zustand'
 import type { Template, Content } from '@/types'
-import { TEMPLATES } from '@/data'
+import { fontDB, TEMPLATES } from '@/data'
 
 interface TemplateStore {
   currentId: Template['id']
@@ -52,11 +52,19 @@ const useTemplateStore = create<TemplateStore>((set) => ({
     set(({ contents, activeContentIndex }) => {
       return {
         contents: contents.map((content, idx) => {
-          if (idx === activeContentIndex) {
+          if (idx !== activeContentIndex) return content
+
+          if (!payload.fontId || content.fontId === payload.fontId) {
             return { ...content, ...payload }
           }
 
-          return content
+          const targetFont = fontDB.get(payload.fontId)
+
+          if (!targetFont) {
+            return content
+          }
+
+          return { ...content, fontId: targetFont.id, fontWeight: targetFont.weight[0] }
         }),
       }
     }),

@@ -13,7 +13,7 @@ import {
   Button,
 } from '@/components/ui'
 import { useCurrentContent, useModifyContent } from '@/store'
-import { FONTS, fontDB } from '@/data'
+import { FONTS, fontDB, fontWeightNames } from '@/data'
 import type { FontId, FontWeight } from '@/types'
 
 const TemplateFontSizeInput = () => {
@@ -54,17 +54,17 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
 
   const targetFont = React.useMemo(() => fontDB.get(fontId), [fontId])
 
+  if (!targetFont) {
+    return null
+  }
+
   return (
     <fieldset className="block space-y-3">
       <legend className="block text-lg font-bold">폰트 변경</legend>
       <Select
-        onValueChange={(value: FontId) => {
-          const font = fontDB.get(value)
-
-          if (font) {
-            modifyContent({ fontId: value, fontWeight: font.weight[0] })
-          }
-        }}
+        key={fontId}
+        defaultValue={fontId}
+        onValueChange={(value: FontId) => modifyContent({ fontId: value })}
       >
         <SelectTrigger>
           <SelectValue placeholder={targetFont?.name} />
@@ -79,15 +79,17 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
       </Select>
       <div className="flex items-center justify-center space-x-2">
         <Select
+          key={`${fontId}${fontWeight}`}
+          defaultValue={fontWeight.toString()}
           onValueChange={(value) => modifyContent({ fontWeight: Number(value) as FontWeight })}
         >
           <SelectTrigger>
-            <SelectValue placeholder={fontWeight.toString()} />
+            <SelectValue placeholder={fontWeightNames.get(fontWeight)} />
           </SelectTrigger>
           <SelectContent>
             {targetFont?.weight.map((weight) => (
               <SelectItem key={`${targetFont.id}${weight}`} value={weight.toString()}>
-                {weight}
+                {fontWeightNames.get(weight)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -99,19 +101,6 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
 }
 
 const TemplateForm = () => {
-  React.useEffect(() => {
-    const unloadHandler = (e: BeforeUnloadEvent) => {
-      e.preventDefault()
-      e.returnValue = ''
-    }
-
-    window.addEventListener('beforeunload', unloadHandler)
-
-    return () => {
-      window.removeEventListener('beforeunload', unloadHandler)
-    }
-  }, [])
-
   return (
     <form className="block w-full p-6 pb-12">
       <div className="space-y-8 p-2">
