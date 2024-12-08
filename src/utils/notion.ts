@@ -1,12 +1,10 @@
-'use client'
-
 import { Client, isFullPage } from '@notionhq/client'
 
-export async function getCount() {
-  const notionClient = new Client({
-    auth: process.env.NEXT_PUBLIC_NOTION_API_KEY,
-  })
+const notionClient = new Client({
+  auth: process.env.NEXT_PUBLIC_NOTION_API_KEY,
+})
 
+export async function getCount() {
   const response = await notionClient.pages.retrieve({
     page_id: process.env.NEXT_PUBLIC_NOTION_PAGE_ID || '',
   })
@@ -14,7 +12,7 @@ export async function getCount() {
   if (isFullPage(response)) {
     const titleProperty = response.properties.title
     if (titleProperty && titleProperty.type === 'title') {
-      return { count: Number(titleProperty.title[0].plain_text), notionClient }
+      return Number(titleProperty.title[0].plain_text)
     } else {
       throw new Error('Title property not found or is of incorrect type')
     }
@@ -24,7 +22,7 @@ export async function getCount() {
 }
 
 export async function increaseCount() {
-  const { count, notionClient } = (await getCount()) || 0
+  const viewCount = (await getCount()) || 0
   return await notionClient.pages.update({
     page_id: process.env.NEXT_PUBLIC_NOTION_PAGE_ID || '',
     properties: {
@@ -33,7 +31,7 @@ export async function increaseCount() {
           {
             type: 'text',
             text: {
-              content: String(count + 1),
+              content: String(viewCount + 1),
             },
           },
         ],
