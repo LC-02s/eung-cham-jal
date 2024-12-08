@@ -34,23 +34,12 @@ const Result = () => {
     }
   }
 
-  const handleIncreaseCount = async () => {
-    try {
-      await fetch('/api/notion', {
-        method: 'POST',
-      })
-    } catch (error) {
-      console.error('Failed to increase count:', error)
-    }
-  }
-
   const handleCopyLink = async () => {
     try {
       const snapshot = saveTemplateSnapshot()
       const sharedURL = `${process.env.NEXT_PUBLIC_DOMAIN}/charm/shared?image=${snapshot}&name=${encodeURI(userName)}`
       await navigator.clipboard.writeText(sharedURL)
       toast.success('링크가 복사되었어요!')
-      await handleIncreaseCount()
     } catch (error) {
       console.error(error)
       toast.error('링크 복사에 실패했어요 ㅠ')

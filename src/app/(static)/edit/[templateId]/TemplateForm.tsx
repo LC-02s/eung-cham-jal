@@ -100,6 +100,16 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
 }
 
 const TemplateForm = () => {
+  const handleIncreaseCount = async () => {
+    try {
+      await fetch('/api/notion', {
+        method: 'POST',
+      })
+    } catch (error) {
+      console.error('Failed to increase count:', error)
+    }
+  }
+
   return (
     <form className="block w-full p-4 pb-12">
       <div className="space-y-8 p-2">
@@ -109,7 +119,9 @@ const TemplateForm = () => {
         <TemplateTextInput />
       </div>
       <Button variant="custom" className="!mt-8 sm:!mt-10 md:!mt-12" asChild>
-        <Link href="/charm/result">저장하기</Link>
+        <Link href="/charm/result" onClick={handleIncreaseCount}>
+          저장하기
+        </Link>
       </Button>
     </form>
   )

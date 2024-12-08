@@ -7,7 +7,7 @@ const ViewCount = async () => {
 
     return (
       <p className="mt-12 break-keep text-center text-base font-medium md:text-lg">
-        {formatNumber(count)}번째 부적을 공유해주세요!
+        {formatNumber(count)}번째 부적을 만들어 주세요!
       </p>
     )
   } catch {
@@ -17,7 +17,7 @@ const ViewCount = async () => {
           <span className="mr-1 h-5 w-16 animate-pulse rounded bg-gray-200" />
           번째{' '}
         </span>
-        부적을 공유해주세요!
+        부적을 만들어 주세요!
       </p>
     )
   }
