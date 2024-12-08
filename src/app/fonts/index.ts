@@ -15,7 +15,7 @@ export const Ddag = localFont({
 })
 
 export const EFJejudoldam = localFont({
-  src: './EFJejudoldam-regular.otf',
+  src: './EFJejudoldam-Regular.otf',
   weight: '400',
   style: 'normal',
   display: 'swap',
