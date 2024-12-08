@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
   Select,
@@ -100,6 +101,8 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
 }
 
 const TemplateForm = () => {
+  const { push } = useRouter()
+
   const handleIncreaseCount = async () => {
     try {
       await fetch('/api/notion', {
@@ -110,6 +113,11 @@ const TemplateForm = () => {
     }
   }
 
+  const submit = React.useCallback(async () => {
+    await handleIncreaseCount()
+    push('/charm/result')
+  }, [push])
+
   return (
     <form className="block w-full p-4 pb-12">
       <div className="space-y-8 p-2">
@@ -118,10 +126,8 @@ const TemplateForm = () => {
         </TemplateFontTypeInput>
         <TemplateTextInput />
       </div>
-      <Button variant="custom" className="!mt-8 sm:!mt-10 md:!mt-12" asChild>
-        <Link href="/charm/result" onClick={handleIncreaseCount}>
-          저장하기
-        </Link>
+      <Button variant="custom" className="!mt-8 sm:!mt-10 md:!mt-12" onClick={submit}>
+        저장하기
       </Button>
     </form>
   )
