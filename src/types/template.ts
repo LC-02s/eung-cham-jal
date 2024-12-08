@@ -1,19 +1,18 @@
-import type { Font } from './font'
+import type { FontId, FontWeight } from './font'
 
 export interface Template {
   id: `type-${number}`
   contents: Content[]
+  ratio: number
+  imageURL: string
   backgroundURL: string
 }
 
 export interface Content {
   id: string
   text: string
-  fontConfig: FontConfig
-}
-
-export interface FontConfig {
-  font: Font
-  weight: number
-  size: number
+  fontId: FontId
+  fontWeight: FontWeight
+  fontSize: number
+  props: { className?: string; style?: React.CSSProperties }
 }

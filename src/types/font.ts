@@ -1,6 +1,6 @@
 export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 
-export type FontName =
+export type FontId =
   | 'Chab'
   | 'Ddag'
   | 'EFJejudoldam'
@@ -13,7 +13,8 @@ export type FontName =
   | 'YoonChildfundkoreaMinGuk'
 
 export interface Font {
-  name: FontName
+  id: FontId
+  name: string
   weight: FontWeight[]
   className: string
 }

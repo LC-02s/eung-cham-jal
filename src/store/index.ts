@@ -17,3 +17,4 @@ export const useNameStore = create(
     },
   ),
 )
+export * from './templateStore'
