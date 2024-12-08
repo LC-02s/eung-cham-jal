@@ -23,7 +23,7 @@ export default function useElementRect<T extends HTMLElement>(
   const [rect, setRect] = React.useState(getElementRect(ref.current))
   const handleResize = React.useCallback(() => {
     setRect(getElementRect(ref.current))
-  }, [ref.current])
+  }, [ref])
 
   useIsomorphicLayoutEffect(() => handleResize(), deps ?? [])
 

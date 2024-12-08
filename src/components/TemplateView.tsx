@@ -17,7 +17,11 @@ interface TemplateViewContentProps extends TemplateViewProps {
 }
 
 const withTemplateViewModifiableContent = ({ index }: Pick<TemplateViewContentProps, 'index'>) => {
-  return ({ className, children, ...props }: JSX.IntrinsicElements['button']) => {
+  return function ModifiableContent({
+    className,
+    children,
+    ...props
+  }: JSX.IntrinsicElements['button']) {
     const activeIndex = useActiveContentIndex()
     const focusContent = useFocusContent()
 
@@ -48,7 +52,7 @@ const TemplateViewContent = ({
   index,
 }: TemplateViewContentProps) => {
   const content = useTemplateContent(index)
-  const targetFont = React.useMemo(() => fontDB.get(content.fontId), [fontDB, content.fontId])
+  const targetFont = React.useMemo(() => fontDB.get(content.fontId), [content.fontId])
   const Component = mode === 'view' ? 'div' : withTemplateViewModifiableContent({ index })
 
   return (
