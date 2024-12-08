@@ -22,7 +22,7 @@ const TemplateFontSizeInput = () => {
   return (
     <Input
       type="number"
-      className="h-10 w-full rounded-xl text-base sm:w-[calc(40%-0.5rem)] md:h-12 md:rounded-2xl md:text-lg"
+      className="h-10 w-[calc(50%-0.5rem)] rounded-xl text-base sm:w-[calc(40%-0.5rem)] md:h-12 md:rounded-2xl md:text-lg"
       value={fontSize}
       onChange={(e) => {
         const value = Number(e.currentTarget.value)
@@ -85,7 +85,9 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
           defaultValue={fontWeight.toString()}
           onValueChange={(value) => modifyContent({ fontWeight: Number(value) as FontWeight })}
         >
-          <SelectTrigger className="w-3/5">{fontWeightNames.get(fontWeight)}</SelectTrigger>
+          <SelectTrigger className="w-1/2 sm:w-3/5">
+            {fontWeightNames.get(fontWeight)}
+          </SelectTrigger>
           <SelectContent>
             {targetFont.weight.map((weight) => (
               <SelectItem key={`${targetFont.id}${weight}`} value={weight.toString()}>
