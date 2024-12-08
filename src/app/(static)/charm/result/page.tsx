@@ -43,7 +43,7 @@ const Result = () => {
         const sharedURL = `${process.env.NEXT_PUBLIC_DOMAIN}/charm/shared?image=${encodedImage}&name=${storeName}`
         await navigator.clipboard.writeText(sharedURL)
         toast.success('링크가 복사되었습니다.')
-        increaseCount()
+        await increaseCount()
       }
     } catch (error) {
       console.error(error)
