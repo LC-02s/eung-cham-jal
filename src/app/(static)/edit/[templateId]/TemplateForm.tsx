@@ -21,7 +21,7 @@ const TemplateFontSizeInput = () => {
 
   return (
     <Input
-      className="w-40"
+      className="h-10 w-full rounded-xl text-base sm:w-[calc(40%-0.5rem)] md:h-12 md:rounded-2xl md:text-lg"
       value={fontSize}
       onChange={(e) => {
         const value = Number(e.currentTarget.value)
@@ -40,8 +40,12 @@ const TemplateTextInput = () => {
 
   return (
     <fieldset className="block space-y-2">
-      <legend className="block text-lg font-bold">텍스트 수정</legend>
-      <Textarea value={text} onChange={(e) => modifyContent({ text: e.currentTarget.value })} />
+      <legend className="block px-1 text-base font-bold md:text-lg">텍스트 수정</legend>
+      <Textarea
+        className="min-h-20 rounded-xl pb-5 text-base md:rounded-2xl md:text-lg"
+        value={text}
+        onChange={(e) => modifyContent({ text: e.currentTarget.value })}
+      />
     </fieldset>
   )
 }
@@ -59,13 +63,13 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
 
   return (
     <fieldset className="block space-y-3">
-      <legend className="block text-lg font-bold">폰트 변경</legend>
+      <legend className="block px-1 text-base font-bold md:text-lg">폰트 변경</legend>
       <Select
         key={fontId}
         defaultValue={fontId}
         onValueChange={(value: FontId) => modifyContent({ fontId: value })}
       >
-        <SelectTrigger>{targetFont.name}</SelectTrigger>
+        <SelectTrigger className="">{targetFont.name}</SelectTrigger>
         <SelectContent>
           {FONTS.map(({ id, name }) => (
             <SelectItem key={id} value={id}>
@@ -80,7 +84,7 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
           defaultValue={fontWeight.toString()}
           onValueChange={(value) => modifyContent({ fontWeight: Number(value) as FontWeight })}
         >
-          <SelectTrigger>{fontWeightNames.get(fontWeight)}</SelectTrigger>
+          <SelectTrigger className="w-3/5">{fontWeightNames.get(fontWeight)}</SelectTrigger>
           <SelectContent>
             {targetFont.weight.map((weight) => (
               <SelectItem key={`${targetFont.id}${weight}`} value={weight.toString()}>
@@ -97,14 +101,14 @@ const TemplateFontTypeInput = ({ children }: React.PropsWithChildren) => {
 
 const TemplateForm = () => {
   return (
-    <form className="block w-full p-6 pb-12">
+    <form className="block w-full p-4 pb-12">
       <div className="space-y-8 p-2">
         <TemplateFontTypeInput>
           <TemplateFontSizeInput />
         </TemplateFontTypeInput>
         <TemplateTextInput />
       </div>
-      <Button variant="custom" className="!mt-12" asChild>
+      <Button variant="custom" className="!mt-8 sm:!mt-10 md:!mt-12" asChild>
         <Link href="/charm/result">저장하기</Link>
       </Button>
     </form>

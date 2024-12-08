@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         custom:
-          'w-full !h-16 flex justify-center items-center !rounded-full border-4 border-gray-700 text-xl font-bold shadow-[0px_4px_0px_1px_#40403F] active:translate-y-1 active:shadow-[0px_1px_0px_1px_#40403F]',
+          'w-full !h-12 flex justify-center items-center !rounded-full border-2 border-gray-700 text-lg font-bold shadow-[0px_3px_0px_1px_#40403F] active:translate-y-0.5 active:shadow-[0px_1px_0px_1px_#40403F]',
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',

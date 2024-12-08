@@ -15,6 +15,11 @@ const config: Config = {
       fontFamily: {
         sans: ['"Pretendard"', ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        xs: '320px',
+        sm: '360px',
+        md: '420px',
+      },
       colors: {
         gray: {
           '50': '#F6F5F2',

@@ -8,7 +8,7 @@ import { useNameStore } from '@/store'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
-const Name = () => {
+const TypingNamePage = () => {
   const router = useRouter()
   const { setName: setStoreName } = useNameStore()
   const [stateName, setStateName] = useState('')
@@ -34,33 +34,35 @@ const Name = () => {
 
   return (
     <>
-      <div className="flex w-full flex-1 flex-col items-center justify-center px-16 text-center">
-        <div className="flex flex-col gap-2 text-3xl font-bold">
-          <span>이름(닉네임)이</span>
-          <span>무엇인가요?</span>
-        </div>
-        <div className="mt-12 w-full">
+      <div className="flex w-full flex-1 flex-col items-center justify-center text-center">
+        <p className="block w-full px-9 text-center text-2xl font-bold !leading-relaxed md:text-3xl">
+          이름(닉네임)이 <br />
+          무엇인가요?
+        </p>
+        <div className="mt-12 flex w-full flex-col items-center justify-center px-9">
           <Input
             ref={inputRef}
             type="text"
             className={cn(
-              'text-center',
-              !stateName ? 'border-red-500 shadow-red-500 focus:shadow-red-500' : '',
+              'w-4/5 min-w-60 text-center',
+              !stateName && 'border-red-500 shadow-red-500 focus:shadow-red-500',
             )}
             value={stateName}
             onChange={handleInputChange}
           />
           {!stateName ? (
-            <p className="weight-semibold mt-4 text-red-500">이름을 입력해주세요</p>
+            <p className="weight-semibold mt-8 break-keep text-center text-base text-red-500 md:text-lg">
+              이름을 입력해주세요
+            </p>
           ) : (
-            <p className="weight-semibold mt-4 text-gray-500">
-              이름을 입력하지 않으면 랜덤네임으로 시작해요 :)
+            <p className="weight-semibold mt-8 break-keep text-center text-base text-gray-600 md:text-lg">
+              이름을 입력하지 않으면 랜덤네임으로{' '}
+              <span className="whitespace-nowrap">시작해요 :)</span>
             </p>
           )}
         </div>
       </div>
-
-      <div className="w-full px-6 py-20">
+      <div className="w-full px-6 py-[8dvh]">
         <Button variant="custom" onClick={handleClick}>
           다음으로
         </Button>
@@ -69,4 +71,4 @@ const Name = () => {
   )
 }
 
-export default Name
+export default TypingNamePage

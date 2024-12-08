@@ -13,11 +13,7 @@ const SharedTemplateView = ({ image }: SharedTemplateViewProps) => {
 
   React.useEffect(() => initTemplate(image), [image, initTemplate])
 
-  return (
-    <div className="mt-8 w-full">
-      <TemplateView mode="view" />
-    </div>
-  )
+  return <TemplateView mode="view" />
 }
 
 export default SharedTemplateView

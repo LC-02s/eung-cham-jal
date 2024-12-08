@@ -38,14 +38,15 @@ const SharedPage = ({ searchParams }: SharedProps) => {
 
   return (
     <>
-      <div className="flex h-[calc(100dvh-3.25rem-20rem)] w-[min(80vw,45vh)] flex-col items-center justify-center px-16 text-center">
-        <div className="flex flex-col gap-2 break-keep text-3xl font-bold">
+      <div className="flex w-full flex-1 flex-col items-center justify-center pt-[5vh]">
+        <p className="mb-[3vh] w-full break-keep px-6 text-center text-lg font-bold !leading-normal sm:text-xl md:text-2xl">
           {name}님의 부적이 완성되었어요!
+        </p>
+        <div className="w-4/5">
+          <SharedTemplateView image={image} />
         </div>
-
-        <SharedTemplateView image={image} />
       </div>
-      <div className="w-full space-y-4 px-6 py-20">
+      <div className="w-full space-y-4 px-6 pb-[8dvh] pt-[8dvh]">
         <Button variant="custom" asChild>
           <Link href="/name" title="나도 만들어보기">
             나도 만들어보기
