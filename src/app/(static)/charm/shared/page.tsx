@@ -1,31 +1,21 @@
-'use client'
-
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui'
-import { useSearchParams } from 'next/navigation'
-import { toast } from 'sonner'
-import { downloadImage } from '@/utils'
+import DownloadButton from './DownloadButton'
 
-const Shared = () => {
-  const searchParams = useSearchParams()
-  const image = searchParams.get('image')
-  const name = searchParams.get('name')
+interface SharedProps {
+  searchParams: { image?: string; name?: string }
+}
 
-  const handleDownload = async () => {
-    if (!image) {
-      toast.error('이미지가 없습니다.')
-      return
-    }
-    try {
-      await downloadImage(decodeURIComponent(image), 'shared-charm.png')
-      toast.success('이미지가 다운로드되었습니다.')
-    } catch (error) {
-      console.error(error)
-      toast.error('이미지 다운로드 중 오류가 발생했습니다.')
-    }
+const SharedPage = ({ searchParams }: SharedProps) => {
+  const { image, name } = searchParams
+
+  if (!image || !name) {
+    notFound()
   }
+
   return (
     <>
       <div className="flex w-full flex-1 flex-col items-center justify-center px-16 text-center">
@@ -35,17 +25,15 @@ const Shared = () => {
         </div>
       </div>
       <div className="w-full space-y-4 px-6 py-20">
-        <Button variant="custom">
+        <Button variant="custom" asChild>
           <Link href="/name" title="나도 만들어보기">
             나도 만들어보기
           </Link>
         </Button>
-        <Button variant="custom" title="소장하기" onClick={handleDownload}>
-          소장하기
-        </Button>
+        <DownloadButton image={image} />
       </div>
     </>
   )
 }
 
-export default Shared
+export default SharedPage
