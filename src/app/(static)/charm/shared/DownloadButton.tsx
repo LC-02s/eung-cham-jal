@@ -5,11 +5,7 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui'
 import { downloadImage } from '@/utils'
 
-interface DownloadButtonProps {
-  image: string
-}
-
-const DownloadButton = ({ image }: DownloadButtonProps) => {
+const DownloadButton = () => {
   const getCharmImage = async (): Promise<string> => {
     const templateEl = document.getElementById('template')
 

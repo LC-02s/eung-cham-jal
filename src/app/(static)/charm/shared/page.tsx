@@ -53,7 +53,7 @@ const SharedPage = ({ searchParams }: SharedProps) => {
             나도 만들어보기
           </Link>
         </Button>
-        <DownloadButton image={image} />
+        <DownloadButton />
       </div>
     </>
   )
