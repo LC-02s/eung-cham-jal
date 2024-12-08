@@ -129,7 +129,10 @@ export const useInitTemplateSnapshot = () => {
   return React.useCallback(
     (snapshot: string) => {
       try {
-        const { templateId, contents }: TemplateSnapshot = JSON.parse(snapshot)
+        const data = decodeURIComponent(snapshot)
+        const separator = new Date().getTime().toString()
+        const targetData = data.replaceAll('\n', separator)
+        const { templateId, contents }: TemplateSnapshot = JSON.parse(targetData)
         const targetTemplate = TEMPLATES.find(({ id }) => id === templateId)
 
         if (!targetTemplate) {
@@ -140,7 +143,7 @@ export const useInitTemplateSnapshot = () => {
           ...targetTemplate,
           contents: contents.map((content, idx) => ({
             ...content,
-            text: decodeURI(content.text),
+            text: decodeURI(content.text.replaceAll(separator, '\n')),
             props: targetTemplate.contents[idx].props,
           })),
         })
