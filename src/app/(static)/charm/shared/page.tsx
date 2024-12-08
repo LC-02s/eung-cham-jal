@@ -12,10 +12,10 @@ interface SharedProps {
 
 export async function generateMetadata({ searchParams }: SharedProps): Promise<Metadata> {
   const { name } = searchParams
-  if (!name)
-    return {
-      title: '공유된 부적',
-    }
+
+  if (!name) {
+    return {}
+  }
 
   const decodedName = decodeURIComponent(name)
 
