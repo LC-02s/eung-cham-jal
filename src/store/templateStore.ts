@@ -83,6 +83,15 @@ export const useTemplate = () => {
   }, [currentId, backgroundURL, ratio, contentsLength])
 }
 
+export const useSaveTemplateSnapshot: () => () => string = () => {
+  const templateId = useTemplateStore((store) => store.currentId)
+  const contents = useTemplateStore((store) => store.contents)
+
+  return React.useCallback(() => {
+    return encodeURIComponent(JSON.stringify({ templateId, contents: contents.map((content) => ({ ...content, text: encodeURI(content.text) })) }))
+  }, [templateId, contents])
+}
+
 export const useTemplateContent = (index: number) => {
   return useTemplateStore(({ contents }) => contents[index])
 }
@@ -96,6 +105,26 @@ export const useCurrentContent: <K extends keyof TemplateStore['contents'][numbe
 }
 
 export const useInitTemplate = () => useTemplateStore((store) => store.initTemplate)
+
+interface TemplateSnapshot {
+  templateId: Template['id']
+  contents: Template['contents']
+}
+
+export const useInitTemplateSnapshot = () => {
+  const initTemplate = useInitTemplate()
+
+  return React.useCallback((data: string) => {
+    const { templateId, contents }: TemplateSnapshot = JSON.parse(data)
+    const targetTemplate = TEMPLATES.find(({ id }) => id === templateId)
+
+    if (!targetTemplate) {
+      throw new Error('')
+    }
+
+    initTemplate({ ...targetTemplate, contents: contents.map((content) => ({ ...content, text: decodeURI(content.text) })) })
+  }, [initTemplate])
+}
 
 export const useFocusContent = () => useTemplateStore((store) => store.focusContent)
 
