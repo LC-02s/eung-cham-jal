@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import Link from 'next/link'
 import html2canvas from 'html2canvas'
-import { useNameStore } from '@/store'
+import { useNameStore, useSaveTemplateSnapshot } from '@/store'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui'
@@ -15,6 +15,7 @@ const Result = () => {
   const charmRef = useRef<HTMLDivElement>(null)
 
   const { name: storeName } = useNameStore()
+  const saveTemplate = useSaveTemplateSnapshot()
 
   const getCharmImage = async (): Promise<string> => {
     if (!charmRef.current) {
@@ -37,14 +38,11 @@ const Result = () => {
 
   const handleCopyLink = async () => {
     try {
-      const image = await getCharmImage()
-      if (image) {
-        const encodedImage = encodeURIComponent(image)
-        const sharedURL = `${process.env.NEXT_PUBLIC_DOMAIN}/charm/shared?image=${encodedImage}&name=${storeName}`
-        await navigator.clipboard.writeText(sharedURL)
-        toast.success('링크가 복사되었습니다.')
-        await increaseCount()
-      }
+      const templateData = saveTemplate()
+      const sharedURL = `${process.env.NEXT_PUBLIC_DOMAIN}/charm/shared?image=${templateData}&name=${storeName}`
+      await navigator.clipboard.writeText(sharedURL)
+      toast.success('링크가 복사되었습니다.')
+      // increaseCount()
     } catch (error) {
       console.error(error)
       toast.error('링크 복사에 실패했습니다. 다시 시도해주세요.')
