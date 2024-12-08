@@ -13,6 +13,8 @@
 
 ## Demo
 
+![screenshot gif](/public/img/charm.gif)
+
 응.참.잘은 [링크](https://eung-cham-jal.vercel.app/)에서 확인해보실 수 있어요.
 
 ## 🛠 Skills
@@ -71,5 +73,3 @@
 - [@ShinYoung-Kim](https://www.github.com/ShinYoung-Kim)
 - [@mi-hee-k](https://www.github.com/mi-hee-k)
 - [@LC-02s](https://www.github.com/LC-02s)
-
-## Screenshots
