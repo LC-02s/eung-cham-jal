@@ -43,10 +43,21 @@ async function increaseCount() {
 }
 
 export async function GET() {
-  return NextResponse.json({ count: await getCount() })
+  try {
+    const count = await getCount()
+
+    return NextResponse.json({ count })
+  } catch {
+    return NextResponse.json({ count: 0 }, { status: 500 })
+  }
 }
 
 export async function POST() {
-  await increaseCount()
-  return NextResponse.json({ message: 'success' })
+  try {
+    await increaseCount()
+
+    return NextResponse.json({ message: 'success' })
+  } catch {
+    return NextResponse.json({ message: 'failed' }, { status: 500 })
+  }
 }
