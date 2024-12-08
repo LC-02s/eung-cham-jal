@@ -76,20 +76,22 @@ const TemplateView = ({ mode }: TemplateViewProps) => {
   const { height } = useElementRect(targetRef)
 
   return (
-    <div
-      id="template"
-      ref={targetRef}
-      className="relative w-full overflow-hidden bg-cover bg-center shadow-2xl"
-      style={{ backgroundImage: `url(${backgroundURL})`, paddingBottom: `${ratio * 100}%` }}
-    >
-      {Array.from({ length: contentsLength }, (_, idx) => (
-        <TemplateViewContent
-          containerRatio={(ratio * 1000) / height}
-          key={idx}
-          mode={mode}
-          index={idx}
-        />
-      ))}
+    <div className="shadow-2xl">
+      <div
+        id="template"
+        ref={targetRef}
+        className="relative w-full overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: `url(${backgroundURL})`, paddingBottom: `${ratio * 100}%` }}
+      >
+        {Array.from({ length: contentsLength }, (_, idx) => (
+          <TemplateViewContent
+            containerRatio={(ratio * 1000) / height}
+            key={idx}
+            mode={mode}
+            index={idx}
+          />
+        ))}
+      </div>
     </div>
   )
 }

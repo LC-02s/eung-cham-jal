@@ -8,11 +8,12 @@ import { useNameStore } from '@/store'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui'
-
-import { downloadImage } from '@/utils'
+import { TemplateView } from '@/components'
+import { downloadImage, increaseCount } from '@/utils'
 
 const Result = () => {
   const charmRef = useRef<HTMLDivElement>(null)
+
   const { name: storeName } = useNameStore()
 
   const getCharmImage = async (): Promise<string> => {
@@ -42,6 +43,7 @@ const Result = () => {
         const sharedURL = `${process.env.NEXT_PUBLIC_DOMAIN}/charm/shared?image=${encodedImage}&name=${storeName}`
         await navigator.clipboard.writeText(sharedURL)
         toast.success('링크가 복사되었습니다.')
+        await increaseCount()
       }
     } catch (error) {
       console.error(error)
@@ -51,10 +53,13 @@ const Result = () => {
 
   return (
     <>
-      <div className="flex h-full w-full flex-1 flex-col items-center justify-center px-16 text-center">
-        <div className="flex flex-col gap-2 text-3xl font-bold">부적이 완성되었어요!</div>
-        <div ref={charmRef} className="mt-8 h-[450px] w-[350px] bg-gray-800 text-white">
-          {storeName}
+      <div className="flex h-[calc(100dvh-3.25rem-30rem)] w-[min(80vw,45vh)] flex-col items-center justify-center px-16 text-center">
+        <div className="flex flex-col gap-2 break-keep text-3xl font-bold">
+          {storeName}님의 부적이 완성되었어요!
+        </div>
+
+        <div ref={charmRef} className="mt-8 w-full">
+          <TemplateView mode="view" />
         </div>
       </div>
       <div className="w-full space-y-4 px-6 py-20">
