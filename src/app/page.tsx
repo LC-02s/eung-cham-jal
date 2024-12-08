@@ -2,9 +2,11 @@ import { Button } from '@/components/ui'
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatNumber } from '@/utils'
+import { getCount } from '@/lib/notion'
+import IncreaseCountButton from '@/app/IncreaseCountButton'
 
-const Main = () => {
-  const viewCount = 1024
+const Main = async () => {
+  const viewCount = await getCount()
 
   return (
     <div className="relative flex min-h-dvh flex-col items-center justify-end">
@@ -36,6 +38,7 @@ const Main = () => {
         <p className="mt-12 break-keep text-center text-lg font-medium">
           {formatNumber(viewCount)}번째 부적을 공유해주세요!
         </p>
+        <IncreaseCountButton />
       </div>
     </div>
   )
