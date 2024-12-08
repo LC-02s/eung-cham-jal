@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 
 import { Button } from '@/components/ui'
 import { TemplateView } from '@/components'
-import { downloadImage, increaseCount } from '@/utils'
+import { downloadImage } from '@/utils'
 
 const Result = () => {
   const charmRef = useRef<HTMLDivElement>(null)

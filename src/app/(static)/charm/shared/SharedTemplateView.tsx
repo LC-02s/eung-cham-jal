@@ -11,9 +11,7 @@ interface SharedTemplateViewProps {
 const SharedTemplateView = ({ image }: SharedTemplateViewProps) => {
   const initTemplate = useInitTemplateSnapshot()
 
-  React.useEffect(() => {
-    initTemplate(image)
-  }, [])
+  React.useEffect(() => initTemplate(image), [image, initTemplate])
 
   return (
     <div className="mt-8 w-full">
