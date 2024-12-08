@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server'
+'use client'
 
 import { Client, isFullPage } from '@notionhq/client'
 
-async function getCount() {
+export async function getCount() {
   const notionClient = new Client({
     auth: process.env.NEXT_PUBLIC_NOTION_API_KEY,
   })
@@ -23,7 +23,7 @@ async function getCount() {
   }
 }
 
-async function increaseCount() {
+export async function increaseCount() {
   const { count, notionClient } = (await getCount()) || 0
   return await notionClient.pages.update({
     page_id: process.env.NEXT_PUBLIC_NOTION_PAGE_ID || '',
@@ -40,24 +40,4 @@ async function increaseCount() {
       },
     },
   })
-}
-
-export async function GET() {
-  try {
-    const { count } = await getCount()
-
-    return NextResponse.json({ count })
-  } catch {
-    return NextResponse.json({ count: 0 }, { status: 500 })
-  }
-}
-
-export async function POST() {
-  try {
-    await increaseCount()
-
-    return NextResponse.json({ message: 'success' })
-  } catch {
-    return NextResponse.json({ message: 'failed' }, { status: 500 })
-  }
 }
