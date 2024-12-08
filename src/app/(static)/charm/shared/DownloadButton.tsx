@@ -1,26 +1,34 @@
 'use client'
 
-import { Button } from '@/components/ui'
+import html2canvas from 'html2canvas'
 import { toast } from 'sonner'
+import { Button } from '@/components/ui'
 import { downloadImage } from '@/utils'
 
-interface DownloadButtonProps {
-  image: string
-}
+const DownloadButton = () => {
+  const getCharmImage = async (): Promise<string> => {
+    const templateEl = document.getElementById('template')
 
-const DownloadButton = ({ image }: DownloadButtonProps) => {
-  const handleDownload = async () => {
+    if (!templateEl) {
+      throw new Error('부적 이미지를 가져오는 중 오류가 발생했습니다')
+    }
+    const canvas = await html2canvas(templateEl)
+    return canvas.toDataURL('image/png')
+  }
+
+  const handleSave = async () => {
     try {
-      await downloadImage(decodeURIComponent(image), 'shared-charm.png')
-      toast.success('이미지가 다운로드되었습니다.')
+      const image = await getCharmImage()
+      await downloadImage(image)
+      toast.success('이미지 저장에 성공했어요!')
     } catch (error) {
       console.error(error)
-      toast.error('이미지 다운로드 중 오류가 발생했습니다.')
+      toast.error('이미지 저장 중 오류가 발생했어요 ㅠ')
     }
   }
 
   return (
-    <Button variant="custom" title="소장하기" onClick={handleDownload}>
+    <Button variant="custom" title="소장하기" onClick={handleSave}>
       소장하기
     </Button>
   )

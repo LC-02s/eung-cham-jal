@@ -20,11 +20,15 @@ export async function generateMetadata({ searchParams }: SharedProps): Promise<M
   const decodedName = decodeURIComponent(name)
 
   return {
-    title: `${decodedName}님의 부적 - 응원 참 잘하는 집`,
-    description: `${decodedName}님이 만든 특별한 부적이 도착했습니다!`,
+    title: `${decodedName}님이 공유하신 부적이에요 - 응원 참 잘하는 집`,
+    description: `${decodedName}님이 만든 특별한 부적이 도착했어요!`,
     openGraph: {
+      type: 'website',
       title: `${decodedName}님의 부적 - 응원 참 잘하는 집`,
-      description: `${decodedName}님이 만든 특별한 부적이 도착했습니다!`,
+      description: `${decodedName}님이 만든 특별한 부적이 도착했어요!`,
+      siteName: '응원 참 잘하는 집',
+      locale: 'ko_KR',
+      images: '/img/og-image.png',
     },
   }
 }
@@ -53,7 +57,7 @@ const SharedPage = ({ searchParams }: SharedProps) => {
             나도 만들어보기
           </Link>
         </Button>
-        <DownloadButton image={image} />
+        <DownloadButton />
       </div>
     </>
   )
