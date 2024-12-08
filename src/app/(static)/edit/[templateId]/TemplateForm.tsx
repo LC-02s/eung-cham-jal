@@ -21,6 +21,7 @@ const TemplateFontSizeInput = () => {
 
   return (
     <Input
+      type="number"
       className="h-10 w-full rounded-xl text-base sm:w-[calc(40%-0.5rem)] md:h-12 md:rounded-2xl md:text-lg"
       value={fontSize}
       onChange={(e) => {
