@@ -6,7 +6,6 @@ import { fontDB } from '@/data'
 import { useElementRect } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { Break } from '@/components'
-import Image from 'next/image'
 
 interface TemplateViewProps {
   mode?: 'view' | 'modify'
@@ -30,7 +29,7 @@ const withTemplateViewModifiableContent = ({ index }: Pick<TemplateViewContentPr
       <button
         type="button"
         {...props}
-        className={cn('pointer-events-auto relative leading-tight', className)}
+        className={cn('pointer-events-auto relative', className)}
         onClick={() => focusContent(index)}
       >
         {children}
@@ -88,12 +87,11 @@ const TemplateView = ({ mode }: TemplateViewProps) => {
         className="relative w-full overflow-hidden bg-cover bg-center"
         style={{ paddingBottom: `${ratio * 100}%` }}
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={backgroundURL}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 inline-block"
           alt="템플릿 배경 이미지"
-          fill
-          priority
         />
         {Array.from({ length: contentsLength }, (_, idx) => (
           <TemplateViewContent
