@@ -44,7 +44,7 @@ async function increaseCount() {
 
 export async function GET() {
   try {
-    const count = await getCount()
+    const { count } = await getCount()
 
     return NextResponse.json({ count })
   } catch {
