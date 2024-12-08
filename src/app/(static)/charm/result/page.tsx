@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import Link from 'next/link'
 import html2canvas from 'html2canvas'
-import { useNameStore, useTemplate } from '@/store'
+import { useNameStore } from '@/store'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui'
@@ -15,8 +15,6 @@ const Result = () => {
   const charmRef = useRef<HTMLDivElement>(null)
 
   const { name: storeName } = useNameStore()
-
-  const { ratio } = useTemplate()
 
   const getCharmImage = async (): Promise<string> => {
     if (!charmRef.current) {
@@ -67,7 +65,7 @@ const Result = () => {
           {storeName}님의 부적이 완성되었어요!
         </div>
 
-        <div ref={charmRef} className={`mt-8 w-full ${ratio ? `aspect-[1/${ratio}]` : ''}`}>
+        <div ref={charmRef} className="mt-8 w-full">
           <TemplateView mode="view" />
         </div>
       </div>
