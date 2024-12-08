@@ -30,6 +30,7 @@ const Main = () => (
           시작하기
         </Link>
       </Button>
+      {/* @ts-expect-error Async Server Component */}
       <ViewCount />
     </div>
   </div>
