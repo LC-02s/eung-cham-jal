@@ -1,3 +1,5 @@
+![intro image](https://github.com/ooh-eung-wan/eung-cham-jal/blob/main/public/img/og-image.png?raw=true)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
