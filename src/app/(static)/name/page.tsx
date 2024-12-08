@@ -6,6 +6,7 @@ import { Button, Input } from '@/components/ui'
 import { getRandomName } from '@/utils'
 import { useNameStore } from '@/store'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 const Name = () => {
   const router = useRouter()
@@ -42,12 +43,15 @@ const Name = () => {
           <Input
             ref={inputRef}
             type="text"
-            className="text-center"
+            className={cn(
+              'text-center',
+              !stateName ? 'border-red-500 shadow-red-500 focus:shadow-red-500' : '',
+            )}
             value={stateName}
             onChange={handleInputChange}
           />
           {!stateName ? (
-            <p className="weight-semibold mt-4 text-red-600">이름을 입력해주세요</p>
+            <p className="weight-semibold mt-4 text-red-500">이름을 입력해주세요</p>
           ) : (
             <p className="weight-semibold mt-4 text-gray-500">
               이름을 입력하지 않으면 랜덤네임으로 시작해요 :)
