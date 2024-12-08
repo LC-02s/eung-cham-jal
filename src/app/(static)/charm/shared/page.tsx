@@ -30,9 +30,9 @@ export async function generateMetadata({ searchParams }: SharedProps): Promise<M
 }
 
 const SharedPage = ({ searchParams }: SharedProps) => {
-  const { image, name } = searchParams
+  const { image, name: userName } = searchParams
 
-  if (!image || !name) {
+  if (!image || !userName) {
     notFound()
   }
 
@@ -40,7 +40,8 @@ const SharedPage = ({ searchParams }: SharedProps) => {
     <>
       <div className="flex w-full flex-1 flex-col items-center justify-center pt-[5vh]">
         <p className="mb-[3vh] w-full break-keep px-6 text-center text-lg font-bold !leading-normal sm:text-xl md:text-2xl">
-          {name}님의 부적이 완성되었어요!
+          {userName}님이 <br />
+          공유하신 부적이에요!
         </p>
         <div className="w-4/5">
           <SharedTemplateView image={image} />
