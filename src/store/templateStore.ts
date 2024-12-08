@@ -1,5 +1,6 @@
 'use client'
 
+import { notFound } from 'next/navigation'
 import React from 'react'
 import { create } from 'zustand'
 import type { Template, Content } from '@/types'
@@ -83,12 +84,28 @@ export const useTemplate = () => {
   }, [currentId, backgroundURL, ratio, contentsLength])
 }
 
+interface TemplateSnapshot {
+  templateId: Template['id']
+  contents: Omit<Content, 'props'>[]
+}
+
 export const useSaveTemplateSnapshot: () => () => string = () => {
   const templateId = useTemplateStore((store) => store.currentId)
   const contents = useTemplateStore((store) => store.contents)
 
   return React.useCallback(() => {
-    return encodeURIComponent(JSON.stringify({ templateId, contents: contents.map((content) => ({ ...content, text: encodeURI(content.text) })) }))
+    const snapshot = JSON.stringify({
+      templateId,
+      contents: contents.map((content) => ({
+        id: content.id,
+        text: encodeURI(content.text),
+        fontId: content.fontId,
+        fontWeight: content.fontWeight,
+        fontSize: content.fontSize,
+      })),
+    } satisfies TemplateSnapshot)
+
+    return encodeURIComponent(snapshot)
   }, [templateId, contents])
 }
 
@@ -106,24 +123,33 @@ export const useCurrentContent: <K extends keyof TemplateStore['contents'][numbe
 
 export const useInitTemplate = () => useTemplateStore((store) => store.initTemplate)
 
-interface TemplateSnapshot {
-  templateId: Template['id']
-  contents: Template['contents']
-}
-
 export const useInitTemplateSnapshot = () => {
   const initTemplate = useInitTemplate()
 
-  return React.useCallback((data: string) => {
-    const { templateId, contents }: TemplateSnapshot = JSON.parse(data)
-    const targetTemplate = TEMPLATES.find(({ id }) => id === templateId)
+  return React.useCallback(
+    (snapshot: string) => {
+      try {
+        const { templateId, contents }: TemplateSnapshot = JSON.parse(snapshot)
+        const targetTemplate = TEMPLATES.find(({ id }) => id === templateId)
 
-    if (!targetTemplate) {
-      throw new Error('')
-    }
+        if (!targetTemplate) {
+          throw new Error()
+        }
 
-    initTemplate({ ...targetTemplate, contents: contents.map((content) => ({ ...content, text: decodeURI(content.text) })) })
-  }, [initTemplate])
+        initTemplate({
+          ...targetTemplate,
+          contents: contents.map((content, idx) => ({
+            ...content,
+            text: decodeURI(content.text),
+            props: targetTemplate.contents[idx].props,
+          })),
+        })
+      } catch {
+        notFound()
+      }
+    },
+    [initTemplate],
+  )
 }
 
 export const useFocusContent = () => useTemplateStore((store) => store.focusContent)
