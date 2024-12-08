@@ -2,11 +2,11 @@ import { Button } from '@/components/ui'
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatNumber } from '@/utils'
-import { getCount } from '@/lib/notion'
 import IncreaseCountButton from '@/app/IncreaseCountButton'
 
 const Main = async () => {
-  const viewCount = await getCount()
+  const data = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/notion`)
+  const { count }: { count: number } = await data.json()
 
   return (
     <div className="relative flex min-h-dvh flex-col items-center justify-end">
@@ -36,7 +36,7 @@ const Main = async () => {
           </Link>
         </Button>
         <p className="mt-12 break-keep text-center text-lg font-medium">
-          {formatNumber(viewCount)}번째 부적을 공유해주세요!
+          {formatNumber(count)}번째 부적을 공유해주세요!
         </p>
         <IncreaseCountButton />
       </div>
