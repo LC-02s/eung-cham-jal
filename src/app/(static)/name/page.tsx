@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 import { Button, Input } from '@/components/ui'
 import { getRandomName } from '@/utils'
@@ -10,15 +10,27 @@ import { useRouter } from 'next/navigation'
 const Name = () => {
   const router = useRouter()
   const { setName: setStoreName } = useNameStore()
-  const [stateName, setStateName] = useState(getRandomName())
+  const [stateName, setStateName] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStateName(e.target.value)
   }
 
   const handleClick = () => {
-    setStoreName(stateName)
-    router.push('/template')
+    if (stateName.trim() === '') {
+      inputRef.current?.focus()
+    } else {
+      setStoreName(stateName)
+      router.push('/template')
+    }
   }
+
+  useEffect(() => {
+    setStateName(getRandomName())
+    inputRef.current?.focus()
+  }, [])
+
   return (
     <>
       <div className="flex w-full flex-1 flex-col items-center justify-center px-16 text-center">
@@ -28,11 +40,19 @@ const Name = () => {
         </div>
         <div className="mt-12 w-full">
           <Input
+            ref={inputRef}
             type="text"
             className="text-center"
             value={stateName}
             onChange={handleInputChange}
           />
+          {!stateName ? (
+            <p className="weight-semibold mt-4 text-red-600">이름을 입력해주세요</p>
+          ) : (
+            <p className="weight-semibold mt-4 text-gray-500">
+              이름을 입력하지 않으면 랜덤네임으로 시작해요 :)
+            </p>
+          )}
         </div>
       </div>
 

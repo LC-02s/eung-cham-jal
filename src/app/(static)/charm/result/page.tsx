@@ -4,16 +4,19 @@ import { useRef } from 'react'
 
 import Link from 'next/link'
 import html2canvas from 'html2canvas'
-import { useNameStore } from '@/store'
+import { useNameStore, useTemplate } from '@/store'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui'
-
+import { TemplateView } from '@/components'
 import { downloadImage } from '@/utils'
 
 const Result = () => {
   const charmRef = useRef<HTMLDivElement>(null)
+
   const { name: storeName } = useNameStore()
+
+  const { ratio } = useTemplate()
 
   const getCharmImage = async (): Promise<string> => {
     if (!charmRef.current) {
@@ -47,14 +50,25 @@ const Result = () => {
       console.error(error)
       toast.error('링크 복사에 실패했습니다. 다시 시도해주세요.')
     }
+
+    try {
+      await fetch('/api/notion', {
+        method: 'POST',
+      })
+    } catch (error) {
+      console.error('Failed to increase count:', error)
+    }
   }
 
   return (
     <>
-      <div className="flex h-full w-full flex-1 flex-col items-center justify-center px-16 text-center">
-        <div className="flex flex-col gap-2 text-3xl font-bold">부적이 완성되었어요!</div>
-        <div ref={charmRef} className="mt-8 h-[450px] w-[350px] bg-gray-800 text-white">
-          {storeName}
+      <div className="flex h-[calc(100dvh-3.25rem-30rem)] w-[min(80vw,45vh)] flex-col items-center justify-center px-16 text-center">
+        <div className="flex flex-col gap-2 break-keep text-3xl font-bold">
+          {storeName}님의 부적이 완성되었어요!
+        </div>
+
+        <div ref={charmRef} className={`mt-8 w-full ${ratio ? `aspect-[1/${ratio}]` : ''}`}>
+          <TemplateView mode="view" />
         </div>
       </div>
       <div className="w-full space-y-4 px-6 py-20">
