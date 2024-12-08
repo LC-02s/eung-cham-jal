@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ViewCount } from '@/components'
 
 const Main = () => (
-  <div className="flex min-h-dvh flex-col items-center justify-end">
+  <div className="flex min-h-[100vh] flex-col items-center justify-end">
     <div className="flex w-full flex-1 flex-col items-center justify-start bg-[url(/img/main-cover.png)] bg-cover bg-bottom bg-no-repeat pb-12 pt-[12vh]">
       <div className="mx-auto mb-[7vh] flex size-20 items-center justify-center rounded-3xl border-[3px] border-gray-700 bg-white sm:size-24 md:size-28">
         <Image
@@ -24,7 +24,7 @@ const Main = () => (
         priority
       />
     </div>
-    <div className="w-full px-6 py-[8dvh]">
+    <div className="w-full px-6 py-[8vh]">
       <Button variant="custom" asChild>
         <Link href="/name" title="시작하기">
           시작하기

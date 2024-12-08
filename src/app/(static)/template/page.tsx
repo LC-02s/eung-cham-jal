@@ -46,7 +46,7 @@ const SelectTemplatePage = () => {
           </Swiper>
         </div>
       </div>
-      <div className="w-full px-6 py-[8dvh]">
+      <div className="w-full px-6 py-[8vh]">
         <Button variant="custom" asChild>
           <Link href={`/edit/${activeId}`} title="선택하기">
             선택하기

@@ -57,7 +57,7 @@ const Result = () => {
           <TemplateView mode="view" />
         </div>
       </div>
-      <div className="w-full space-y-4 px-6 pb-[8dvh] pt-[8dvh]">
+      <div className="w-full space-y-4 px-6 pb-[8vh] pt-[8vh]">
         <Button variant="custom" onClick={handleSave}>
           소장하기
         </Button>

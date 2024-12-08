@@ -62,7 +62,7 @@ const TypingNamePage = () => {
           )}
         </div>
       </div>
-      <div className="w-full px-6 py-[8dvh]">
+      <div className="w-full px-6 py-[8vh]">
         <Button variant="custom" onClick={handleClick}>
           다음으로
         </Button>

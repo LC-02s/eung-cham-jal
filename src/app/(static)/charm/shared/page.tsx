@@ -46,7 +46,7 @@ const SharedPage = ({ searchParams }: SharedProps) => {
           <SharedTemplateView image={image} />
         </div>
       </div>
-      <div className="w-full space-y-4 px-6 pb-[8dvh] pt-[8dvh]">
+      <div className="w-full space-y-4 px-6 pb-[8vh] pt-[8vh]">
         <Button variant="custom" asChild>
           <Link href="/name" title="나도 만들어보기">
             나도 만들어보기

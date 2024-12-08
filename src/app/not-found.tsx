@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 
 const NotFound = () => {
   return (
-    <div className="relative flex min-h-dvh w-full flex-col items-center justify-end">
+    <div className="relative flex min-h-[100vh] w-full flex-col items-center justify-end">
       <div className="flex w-full flex-1 flex-col items-center justify-center px-6 pb-12 pt-20">
         <Image src="/img/not-found.png" alt="우는 이미지" width={240} height={240} priority />
         <p
