@@ -13,7 +13,7 @@ const TEMPLATES: Template[] = [
         fontSize: 86,
         props: {
           className:
-            'left-[54%] top-[32%] max-w-[60%] text-[#633200] w-full -translate-y-1/2 -translate-x-1/2 break-keep',
+            'top-[22.5%] inset-x-0 pl-[8%] inline-flex justify-center items-center text-[#633200] text-center w-full break-keep',
         },
       },
     ],
@@ -32,7 +32,7 @@ const TEMPLATES: Template[] = [
         fontSize: 60,
         props: {
           className:
-            'left-1/2 -translate-x-1/2 w-fit whitespace-nowrap text-[#7F0E0E] top-[24%] rotate-180',
+            'inset-x-0 inline-flex justify-center items-center whitespace-nowrap text-[#7F0E0E] text-center top-[24%] rotate-180',
           style: { letterSpacing: '0.42em' },
         },
       },
@@ -44,7 +44,7 @@ const TEMPLATES: Template[] = [
         fontSize: 160,
         props: {
           className:
-            'top-1/2 left-1/2 -translate-x-1/2 text-[#7F0E0E] w-fit whitespace-nowrap leading-tight -translate-y-1/2',
+            'inset-0 inline-flex justify-center items-center text-[#7F0E0E] text-center whitespace-nowrap leading-tight',
         },
       },
       {
@@ -55,7 +55,7 @@ const TEMPLATES: Template[] = [
         fontSize: 60,
         props: {
           className:
-            'left-1/2 -translate-x-1/2 bottom-[24%] w-fit whitespace-nowrap text-[#7F0E0E]',
+            'inset-x-0 bottom-[24%] inline-flex justify-center items-center whitespace-nowrap text-[#7F0E0E] text-center',
           style: { letterSpacing: '0.42em' },
         },
       },
@@ -74,7 +74,8 @@ const TEMPLATES: Template[] = [
         fontWeight: 700,
         fontSize: 120,
         props: {
-          className: 'left-1/2 -translate-x-1/2 top-[6%] w-fit whitespace-nowrap text-[#023802]',
+          className:
+            'top-[6%] inset-x-0 inline-flex justify-center items-center whitespace-nowrap text-[#023802] text-center',
           style: { letterSpacing: '0.3em' },
         },
       },
@@ -85,7 +86,8 @@ const TEMPLATES: Template[] = [
         fontWeight: 700,
         fontSize: 120,
         props: {
-          className: 'right-1/2 bottom-[6%] translate-x-1/2 w-fit whitespace-nowrap text-[#023802]',
+          className:
+            'bottom-[6%] inset-x-0 inline-flex justify-center items-center whitespace-nowrap text-[#023802] text-center',
           style: { letterSpacing: '0.3em' },
         },
       },

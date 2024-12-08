@@ -6,6 +6,7 @@ import { fontDB } from '@/data'
 import { useElementRect } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { Break } from '@/components'
+import Image from 'next/image'
 
 interface TemplateViewProps {
   mode?: 'view' | 'modify'
@@ -29,7 +30,7 @@ const withTemplateViewModifiableContent = ({ index }: Pick<TemplateViewContentPr
       <button
         type="button"
         {...props}
-        className={cn('relative', className)}
+        className={cn('pointer-events-auto relative leading-tight', className)}
         onClick={() => focusContent(index)}
       >
         {children}
@@ -53,20 +54,24 @@ const TemplateViewContent = ({
 }: TemplateViewContentProps) => {
   const content = useTemplateContent(index)
   const targetFont = React.useMemo(() => fontDB.get(content.fontId), [content.fontId])
-  const Component = mode === 'view' ? 'div' : withTemplateViewModifiableContent({ index })
+  const Component = mode === 'view' ? 'p' : withTemplateViewModifiableContent({ index })
 
   return (
-    <Component
-      id={content.id}
-      className={cn('absolute', content.props.className, targetFont?.className)}
-      style={{
-        ...content.props.style,
-        fontWeight: content.fontWeight,
-        fontSize: content.fontSize / containerRatio,
-      }}
+    <div
+      className={cn('pointer-events-none absolute z-10', content.props.className)}
+      style={content.props.style}
     >
-      <Break value={content.text} />
-    </Component>
+      <Component
+        id={content.id}
+        className={targetFont?.className}
+        style={{
+          fontWeight: content.fontWeight,
+          fontSize: content.fontSize / containerRatio,
+        }}
+      >
+        <Break value={content.text} />
+      </Component>
+    </div>
   )
 }
 
@@ -81,8 +86,15 @@ const TemplateView = ({ mode }: TemplateViewProps) => {
         id="template"
         ref={targetRef}
         className="relative w-full overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundURL})`, paddingBottom: `${ratio * 100}%` }}
+        style={{ paddingBottom: `${ratio * 100}%` }}
       >
+        <Image
+          src={backgroundURL}
+          className="absolute inset-0 z-0"
+          alt="템플릿 배경 이미지"
+          fill
+          priority
+        />
         {Array.from({ length: contentsLength }, (_, idx) => (
           <TemplateViewContent
             containerRatio={(ratio * 1000) / height}
